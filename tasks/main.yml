@@ -5,6 +5,7 @@
     path: /run/haproxy
     state: directory
     mode: "0755"
+  when: ansible_os_family != 'Debian'
 
 - name: Ensure HAProxy is installed.
   package: 
