@@ -1,8 +1,16 @@
 ---
+
+- name: Ensure HAProxy socket directory exists
+  file:
+    path: /run/haproxy
+    state: directory
+    mode: "0755"
+
 - name: Ensure HAProxy is installed.
   package: 
     name: haproxy
     state: present
+    update_cache: true
 
 - name: Ensure HAProxy is enabled (so init script will start it on Debian).
   lineinfile:
@@ -16,7 +24,7 @@
   template:
     src: haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
-    mode: 0644
+    mode: 0640
     validate: haproxy -f %s -c -q
   notify: restart haproxy
 
@@ -24,6 +32,4 @@
   service: 
     name: haproxy
     state: started
-    enabled: yes
-  tags:
-    - notest
+    enabled: true
