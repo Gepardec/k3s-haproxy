@@ -6,3 +6,4 @@ work/
 .vagrant/
 .k3s/*
 *.iml
+.idea/
