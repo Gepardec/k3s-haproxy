@@ -17,6 +17,8 @@ install:
 - pip install -r requirements.txt
 env:
   jobs:
-  - SCENARIO=default
+  - SCENARIO=centos7
+  - SCENARIO=centos8
+  - SCENARIO=debian10
 script:
 - molecule test --scenario-name ${SCENARIO}
